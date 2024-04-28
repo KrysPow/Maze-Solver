@@ -47,7 +47,7 @@ class Line():
 
     
 class Cell():
-    def __init__(self, x_1, x_2, y_1 , y_2, win, hlw=True, hrw=True, htw=True, hbw=True):
+    def __init__(self, x_1, x_2, y_1 , y_2, win=None, hlw=True, hrw=True, htw=True, hbw=True, visited=False):
         self.has_left_wall = hlw
         self.has_right_wall = hrw
         self.has_bottom_wall = hbw
@@ -57,16 +57,28 @@ class Cell():
         self.y_1 = y_1
         self.y_2 = y_2
         self.win = win
+        self.visited = visited
 
     def draw(self):
         if self.has_left_wall:
             self.win.draw_line(Line(Point(self.x_1, self.y_1), Point(self.x_1, self.y_2)), 'black')
+        else:
+            self.win.draw_line(Line(Point(self.x_1, self.y_1), Point(self.x_1, self.y_2)), 'white')
+
         if self.has_right_wall:
             self.win.draw_line(Line(Point(self.x_2, self.y_1), Point(self.x_2, self.y_2)), 'black')
+        else:
+            self.win.draw_line(Line(Point(self.x_2, self.y_1), Point(self.x_2, self.y_2)), 'white')
+
         if self.has_top_wall:
             self.win.draw_line(Line(Point(self.x_1, self.y_1), Point(self.x_2, self.y_1)), 'black')
+        else:
+            self.win.draw_line(Line(Point(self.x_1, self.y_1), Point(self.x_2, self.y_1)), 'white')
+
         if self.has_bottom_wall:
             self.win.draw_line(Line(Point(self.x_1, self.y_2), Point(self.x_2, self.y_2)), 'black')
+        else:
+            self.win.draw_line(Line(Point(self.x_1, self.y_2), Point(self.x_2, self.y_2)), 'white')
 
     def draw_move(self, to_cell, undo=False):
         c1 = Point((self.x_2+self.x_1)/2, (self.y_2+self.y_1)/2)
@@ -79,5 +91,6 @@ class Cell():
 
         
 
+        
 
 
